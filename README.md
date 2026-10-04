@@ -2,36 +2,44 @@
 
 Content, notebooks, and guides for the AI for Marketing (AI4TM) masterclass — 6 weeks covering AI fundamentals, evaluation, compliance, synthetic data, knowledge graphs, and agentic workflows.
 
-## Getting Started (Low-Cost, No Local Install)
+## Getting Started (local, OpenRouter)
 
-This course uses **Google Gemini's pay-as-you-go API**. A genuine no-card free tier still exists in most regions, including the US — but this course has everyone enable billing anyway, everywhere, because billed ("Paid tier") usage gets Google's stronger data-handling terms (skips human review, isn't used for training), not because Google requires it outside the EEA, UK, and Switzerland, where billing genuinely is mandatory. Usage on the lightweight models this course uses runs at low, pay-as-you-go rates (fractions of a cent per request is typical, but confirm current pricing before you start — Google changes it). Gemini isn't available in mainland China or Hong Kong.
+This course runs on **your own computer** and talks to models through **OpenRouter**, using the official **OpenAI Python library**.
+
+OpenRouter is one front door. You keep one API key. Behind that door you can pick many models (OpenAI, Google, Anthropic, and others) by changing a model name, not by installing a new library.
+
+The default chat model is `qwen/qwen3-8b`. Embeddings default to `qwen/qwen3-embedding-8b`. Each notebook sets those names in a code cell (`MODEL_NAME`), so you can change them without editing `.env`. These slugs work in more regions than some OpenAI or Gemini names, which can return a 403 “not available in your region” error. Usage on lightweight models is cheap (fractions of a cent per request is typical). Confirm current pricing at [openrouter.ai/models](https://openrouter.ai/models) before a large run, and set a credit limit.
 
 ### Quick Start (10 minutes)
 
-1. **Fork this repository**:
-   Click "Fork" at the top right of this page. This gives you your own copy at `github.com/YOUR_USERNAME/AI4TM` to save your work into as you go, without touching the original.
+1. **Fork this repository** and clone your fork:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/ai4tm.git
+   cd ai4tm
+   ```
 
-2. **Get a Gemini API key**:
-   Go to [aistudio.google.com/apikey](https://aistudio.google.com/apikey), enable billing when prompted, and create a key
+2. **Create an OpenRouter API key** at [openrouter.ai/keys](https://openrouter.ai/keys), add a little credit, and set a credit limit at [openrouter.ai/settings/credits](https://openrouter.ai/settings/credits).
 
-3. **Open notebooks in Google Colab**:
-   Click any `.ipynb` file in this repository → Look for "Open in Colab" badge → Click it
+3. **Store the key locally**. Create a `.env` file in the project folder (or copy `.env.example`) and fill it in:
+   ```
+   OPENROUTER_API_KEY=sk-or-v1-your-key-here
+   ```
+   The model name is set in each notebook (`MODEL_NAME = "qwen/qwen3-8b"`), not in `.env`. `.env` is already in `.gitignore` so it will not be uploaded to GitHub.
 
-4. **Start with the setup guide**:
-   [week_2/lesson08_setup_guide.ipynb](week_2/lesson08_setup_guide.ipynb) — it walks through all of the above in order, plus how to save your work into your fork
+4. **Install [uv](https://docs.astral.sh/uv/)** once, then create this week's environment:
+   ```bash
+   cd week_2
+   uv venv
+   uv pip install -r requirements.txt
+   ```
+   In Cursor or VS Code, open the notebook and choose the `.venv` inside that week folder as the kernel.
 
-**That's it!** No local installation, no complex setup — just a Google account with billing enabled.
-
-### What You Get
-
-- Google Colab - Run code in your browser, no installation
-- Gemini API - low pay-as-you-go cost on the lightweight models this course uses (billing must be enabled)
-- GitHub - Save and share your work
-- Free GPUs in Colab (a separate Colab feature — unaffected by the Gemini API billing change above)
+5. **Start with the setup guide**:
+   [week_2/lesson08_setup_guide.ipynb](week_2/lesson08_setup_guide.ipynb)
 
 ### Privacy Note
 
-Unpaid/free-quota AI usage (Google, OpenAI, etc.) may be reviewed by humans or used to improve models. Google's terms say billed ("Paid tier") Gemini usage is not used for training and skips human review for that purpose — check the "Paid tier" badge in AI Studio to confirm which applies to your key, don't assume. Either way: **only use public, synthetic, or anonymized data in this course.** Never send confidential or client data.
+Anything you send through an API leaves your computer and reaches a third party. Provider terms about training and human review vary by model. **Only use public, synthetic, or anonymized data in this course.** Never send confidential or client data.
 
 ## Course Structure
 
@@ -39,7 +47,7 @@ Unpaid/free-quota AI usage (Google, OpenAI, etc.) may be reviewed by humans or u
 **Topics**: Neural networks, attention, tokenization, embeddings
 **Approach**: Production failure modes (light theory)
 **Content**:
-- [Setup Guide (Notebook)](week_2/lesson08_setup_guide.ipynb) - Colab + Gemini API + GitHub
+- [Setup Guide (Notebook)](week_2/lesson08_setup_guide.ipynb) - local setup + OpenRouter via the OpenAI Python library
 - [Token Cost Guide (Notebook)](week_2/lesson09_token_cost_guide.ipynb) - Estimate cost before running a batch job
 
 ### Week 3: Evaluation
@@ -66,7 +74,7 @@ Unpaid/free-quota AI usage (Google, OpenAI, etc.) may be reviewed by humans or u
 ### Week 6: Knowledge Graphs
 **Topics**: Nodes, edges, and Cypher; turning a set of documents into a graph with an LLM and merging the duplicates it produces; what a graph answers that a table struggles with; GraphRAG and checking whether an answer is actually grounded in the graph
 **Content**:
-- [Setup: your knowledge graph environment (Notebook)](week_6/setup_guide.ipynb) - Neo4j AuraDB Free signup, connecting the graph database, and a swappable `LLM_PROVIDER` config so the rest of the week's notebook can switch model providers by changing one value
+- [Setup: your knowledge graph environment (Notebook)](week_6/setup_guide.ipynb) - Neo4j AuraDB Free signup, connecting the graph database, and a `call_llm()` helper that talks to OpenRouter
 - [Building and querying a knowledge graph (Notebook)](week_6/knowledge_graph_pipeline.ipynb) - Extracting entities and relationships from a set of internal documents, merging duplicate entities, loading and querying in Cypher, and GraphRAG with a groundedness check
 
 ### Week 7: Agentic Workflows
@@ -75,46 +83,37 @@ Unpaid/free-quota AI usage (Google, OpenAI, etc.) may be reviewed by humans or u
 - [Building an agentic content pipeline (Notebook)](week_7/agentic_content_pipeline.ipynb) - Rebuilding a compact content-gap table, then a hand-written tool-calling loop (three read-only tools, two visible stopping conditions) that turns it into grounded content recommendations
 - [Generating and evaluating a landing page brief (Notebook)](week_7/landing_page_brief_generator.ipynb) - A guardrailed brief generator for one content gap, scored by reusing Week 3's evaluation template against a mix of LLM-judged and objectively-recomputed criteria
 
-##  Tools Used
+## Tools Used
 
-- **Google Colab** (default) - Cloud-based notebooks, no installation
-- **Google Gemini API** (default, low-cost pay-as-you-go, billing required) - AI model access
+- **Your computer** - Cursor, VS Code, Jupyter Lab, or any local notebook app
+- **OpenRouter + the OpenAI Python library** - one key, many models
 - **GitHub** - Version control and portfolio
-
-**Already have OpenAI or Anthropic API?** You can use those instead — see the optional section in the setup notebook.
 
 ## For Instructors
 
-- All notebooks designed for Google Colab (one-click from GitHub)
-- Local setup available as optional/advanced path
+- All notebooks are designed to run locally
 - Students work in their own fork, never as collaborators on this repository — nobody but the instructor team can push to it, forking or not. `main` is branch-protected (PR review required, no force-push or deletion).
 
-##  For Students
+## For Students
 
 ### Before Each Week
-1. Open that week's notebook in Colab
-2. Make sure your API key is in Secrets (🔑 icon)
-3. Run the setup cells
+1. Open that week's notebook on your computer
+2. Make sure `OPENROUTER_API_KEY` is in `.env`
+3. Create that week's environment if you haven't (`cd week_N && uv venv && uv pip install -r requirements.txt`) and select that kernel
+4. Run the setup cells
 
 ### Tips
-- **Save often**: File → Save a copy in GitHub, into your fork
+- **Save often**: `git add`, `git commit`, `git push` into your fork
 - **Experiment**: Try changing code to see what happens
-- **Watch your spend**: this course runs on billed usage, not the free tier — check pricing at [AI Studio](https://aistudio.google.com/apikey) and use the token cost guide before a big batch job
+- **Watch your spend**: check pricing at [openrouter.ai/models](https://openrouter.ai/models) and use the token cost guide before a big batch job
 - **No real data**: Only use public or made-up data
 
-##  Important Notes
+## Important Notes
 
-- **Never commit API keys** - use Colab Secrets or `.env` files (local). See [week_4/lesson18_api_key_security.ipynb](week_4/lesson18_api_key_security.ipynb) for how keys leak and how to catch it.
-- This course has you enable billing on your Google account everywhere, even though a genuine no-card free tier still exists in most regions — billing is only Google-*required* in the EEA, UK, and Switzerland; elsewhere it's this course's own choice, for the data-handling benefit below
-- Data-use policy (human review, model training) depends on whether your key is on a "Paid tier" project — check the badge in AI Studio, don't assume
+- **Never commit API keys** - use `.env` files. See [week_4/lesson18_api_key_security.ipynb](week_4/lesson18_api_key_security.ipynb) for how keys leak and how to catch it.
+- Data-use policy (human review, model training) depends on the model behind the OpenRouter slug — check that model's terms, don't assume
 
-## Optional: Local Setup
-
-For experienced users who prefer local development, see the "Optional B: Local Setup" section in [week_2/lesson08_setup_guide.ipynb](week_2/lesson08_setup_guide.ipynb).
-
-Most learners should use Google Colab (the default path).
-
-##  Questions?
+## Questions?
 
 Bring them to the office hours or use your course space to post them :)
 

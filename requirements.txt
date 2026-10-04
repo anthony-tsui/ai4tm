@@ -1,52 +1,23 @@
-# AI4TM Masterclass - Python Dependencies
-#
-# NOTE: This file is for OPTIONAL local setup only.
-# Most learners should use Google Colab (no installation required).
-#
-# Google Colab already has most of these packages pre-installed.
-# Only install locally if you're an advanced user following the local setup guide.
-#
-# Install with: pip install -r requirements.txt
+# Optional whole-repo install. Prefer each week's own requirements.txt:
+#   cd week_N
+#   uv venv
+#   uv pip install -r requirements.txt
 
-# === Primary AI API (Free Tier) ===
-# Google Gemini - NEW unified SDK (replaces deprecated google-generativeai)
-google-genai>=0.1.0
-
-# === Optional AI APIs (Paid - Only if you already have keys) ===
-anthropic>=0.18.0
 openai>=1.0.0
-
-# === Core Data Science ===
-# These are pre-installed in Colab but needed for local setup
+python-dotenv>=1.0.0
+tiktoken>=0.7.0
 numpy>=1.24.0
 pandas>=2.0.0
 matplotlib>=3.7.0
 seaborn>=0.12.0
 scipy>=1.10.0
-
-# === Machine Learning ===
 scikit-learn>=1.3.0
-
-# === Deep Learning (Optional - mainly for later sessions) ===
-# Uncomment if needed for local setup
-# torch>=2.0.0
-# transformers>=4.30.0
-
-# === Jupyter (for local development) ===
 jupyter>=1.0.0
 notebook>=7.0.0
 ipywidgets>=8.0.0
-
-# === Utilities ===
-python-dotenv>=1.0.0  # For loading API keys from .env file (local only)
 requests>=2.31.0
-
-# === Visualization Enhancements ===
 plotly>=5.14.0
-
-# === Knowledge Graphs (Session 5) ===
 networkx>=3.1
-
-# === Development Tools (Optional) ===
-# black>=23.0.0  # Code formatting
-# pytest>=7.0.0  # Testing
+neo4j>=5.0.0
+nltk>=3.8.0
+rouge-score>=0.1.2
