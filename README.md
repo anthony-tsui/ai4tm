@@ -8,7 +8,7 @@ This course runs on **your own computer** and talks to models through **OpenRout
 
 OpenRouter is one front door. You keep one API key. Behind that door you can pick many models (OpenAI, Google, Anthropic, and others) by changing a model name, not by installing a new library.
 
-The default chat model is `qwen/qwen3-8b`. Embeddings default to `qwen/qwen3-embedding-8b`. Each notebook sets those names in a code cell (`MODEL_NAME`), so you can change them without editing `.env`. These slugs work in more regions than some OpenAI or Gemini names, which can return a 403 “not available in your region” error. Usage on lightweight models is cheap (fractions of a cent per request is typical). Confirm current pricing at [openrouter.ai/models](https://openrouter.ai/models) before a large run, and set a credit limit.
+The default chat model is `z-ai/glm-5.3-flash`. Embeddings default to `qwen/qwen3-embedding-8b`. Each notebook sets those names in a code cell (`MODEL_NAME`), so you can change them without editing `.env`. These slugs work in more regions than some OpenAI or Gemini names, which can return a 403 “not available in your region” error. Usage on lightweight models is cheap (fractions of a cent per request is typical). Confirm current pricing at [openrouter.ai/models](https://openrouter.ai/models) before a large run, and set a credit limit.
 
 ### Quick Start (10 minutes)
 
@@ -24,7 +24,7 @@ The default chat model is `qwen/qwen3-8b`. Embeddings default to `qwen/qwen3-emb
    ```
    OPENROUTER_API_KEY=sk-or-v1-your-key-here
    ```
-   The model name is set in each notebook (`MODEL_NAME = "qwen/qwen3-8b"`), not in `.env`. `.env` is already in `.gitignore` so it will not be uploaded to GitHub.
+   The model name is set in each notebook (`MODEL_NAME = "z-ai/glm-5.3-flash"`), not in `.env`. `.env` is already in `.gitignore` so it will not be uploaded to GitHub.
 
 4. **Install [uv](https://docs.astral.sh/uv/)** once, then create this week's environment:
    ```bash
