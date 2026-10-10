@@ -1,0 +1,4 @@
+customer_id,feedback,predicted_label
+101,"Refund never showed up, call me at 555-234-9981 if you need details.",Returns & Refunds
+102,"Great service, thanks!",Returns & Refunds
+103,Still waiting on my return label.,Returns & Refunds
