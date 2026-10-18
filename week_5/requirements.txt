@@ -1,6 +1,9 @@
 # Week 5 dependencies. Install once from this folder:
-#   uv venv
+#   uv venv --python 3.12
 #   uv pip install -r requirements.txt
+#
+# Needs Python 3.11 or 3.12. synthcity can't be installed on 3.13+:
+# its torch pin has no 3.13 wheels.
 #
 # auto_synthetic_data_platform is installed separately in the notebook
 # with --no-deps because its PyPI pins are broken on current Python.
@@ -8,6 +11,9 @@
 ipykernel
 synthcity
 opacus<1.5
+# optuna 5 made suggest_int()'s step argument keyword-only; synthcity still passes it
+# positionally, so tuning fails with "suggest_int() takes 4 positional arguments".
+optuna<5
 ipython
 kaleido
 fastapi

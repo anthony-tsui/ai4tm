@@ -70,13 +70,13 @@ Anything you send through an API leaves your computer and reaches a third party.
 ### Week 5: Synthetic Data
 **Topics**: Generating and using synthetic data for marketing
 **Content**:
-- [Synthetic Data Pipeline (Notebook)](week_5/synthetic_data_pipeline.ipynb) - Preprocessing a table, training and tuning a synthetic data generator, and evaluating the synthetic output against the original
+- [Synthetic Data Pipeline (Notebook)](week_5/lesson24_synthetic_data_pipeline.ipynb) - Preprocessing a table, training and tuning a synthetic data generator, and evaluating the synthetic output against the original
 
 ### Week 6: Knowledge Graphs
 **Topics**: Nodes, edges, and Cypher; turning a set of documents into a graph with an LLM and merging the duplicates it produces; what a graph answers that a table struggles with; GraphRAG and checking whether an answer is actually grounded in the graph
 **Content**:
 - [Setup: your knowledge graph environment (Notebook)](week_6/setup_guide.ipynb) - Neo4j AuraDB Free signup, connecting the graph database, and a `call_llm()` helper that talks to OpenRouter
-- [Building and querying a knowledge graph (Notebook)](week_6/knowledge_graph_pipeline.ipynb) - Extracting entities and relationships from a set of internal documents, merging duplicate entities, loading and querying in Cypher, and GraphRAG with a groundedness check
+- [Building and querying a knowledge graph (Notebook)](week_6/lesson26_knowledge_graph_pipeline.ipynb) - Extracting entities and relationships from a set of internal documents, merging duplicate entities, loading and querying in Cypher, and GraphRAG with a groundedness check
 
 ### Week 7: Agentic Workflows
 **Topics**: Search intent taxonomies, clustering a search performance export into content gaps, an agent (tools + a loop) that reads that table, generating a landing page brief and evaluating it against the Week 3 template
