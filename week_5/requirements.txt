@@ -1,12 +1,12 @@
-# Week 5 dependencies. Install once from this folder:
-#   uv venv --python 3.12
-#   uv pip install -r requirements.txt
+# Week 5 uses the single project environment, not a folder of its own.
+# From the project folder (the one with pyproject.toml):
+#   uv sync
 #
 # Needs Python 3.11 or 3.12. synthcity can't be installed on 3.13+:
 # its torch pin has no 3.13 wheels.
 #
-# auto_synthetic_data_platform is installed separately in the notebook
-# with --no-deps because its PyPI pins are broken on current Python.
+# auto-synthetic-data-platform is a project dependency. Its PyPI pins are
+# ignored in pyproject.toml because they do not install on current Python.
 
 ipykernel
 synthcity

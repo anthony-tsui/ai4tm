@@ -20,11 +20,15 @@ dependencies = [
     "ipykernel",
     "requests>=2.31.0",
     "plotly>=5.14.0",
-    "networkx>=3.1",
+    "networkx>=2.8,<3",
     "neo4j>=5.0.0",
     "nltk>=3.8.0",
     "rouge-score>=0.1.2",
-    "synthcity",
+    "torch>=2.1,<2.3",
+    "torchvision>=0.16,<0.18",
+    "synthcity>=0.2.9",
+    "auto-synthetic-data-platform",
+    "optuna>=3.1,<5",
     "opacus<1.5",
     "kaleido",
     "fastapi",
@@ -37,3 +41,26 @@ dependencies = [
 
 [tool.uv]
 package = false
+
+# The February 2024 release pins numpy==1.23.5, torch==1.13.1, and other
+# versions that have no installable builds for current Python. Ignore those
+# pins and keep synthcity, which is the library the package actually runs on.
+dependency-metadata = [
+    { name = "auto-synthetic-data-platform", requires-dist = ["synthcity>=0.2.9"] },
+]
+
+# Windows and Linux PyPI torch builds for this version are CPU-only.
+# synthcity can only use torch 2.1 or 2.2, and those CUDA wheels live on the
+# cu121 index. macOS has no CUDA wheels, so it keeps the normal PyPI build.
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu121", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchvision = [
+    { index = "pytorch-cu121", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
