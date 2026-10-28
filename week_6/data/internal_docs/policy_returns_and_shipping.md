@@ -4,7 +4,7 @@
 
 ## Shipping SLA
 
-Standard shipping is quoted at 5-7 business days from order confirmation. If a shipment arrives more than 10 business days after the quoted window, the order qualifies for a **late-shipment remedy**: the customer may choose either a 20% refund on that order or a free return with full refund. This remedy applies regardless of the reason for the delay (carrier, warehouse, or demand surge).
+Standard shipping is quoted at 5-7 business days from order confirmation. If a shipment arrives more than 10 business days after order confirmation, the order qualifies for a **late-shipment remedy**: the customer may choose either a 20% refund on that order or a free return with full refund. This remedy applies regardless of the reason for the delay (carrier, warehouse, or demand surge).
 
 ## Manufacturing defects
 
