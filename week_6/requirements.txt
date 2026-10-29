@@ -1,9 +1,10 @@
-# Week 6 dependencies. Install once from this folder:
-#   uv venv
-#   uv pip install -r requirements.txt
+# Week 6 uses the single project environment, not a folder of its own.
+# From the project folder (the one with pyproject.toml):
+#   uv sync
 
 ipykernel
 openai
+pydantic
 python-dotenv
 tiktoken
 neo4j
